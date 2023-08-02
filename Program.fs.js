@@ -12,8 +12,6 @@ export function add(x, y) {
     return x + y;
 }
 
-export const result = add(1, 3);
-
 (function () {
     const arg = add(1, 2);
     toConsole(printf("1 + 2 = %f"))(arg);
