@@ -5,12 +5,15 @@
 	"main": "Program.fs.js",
 	"type": "module",
 	"scripts": {
-		"dev": "dotnet fable watch --run npx vite"
+		"dev": "dotnet fable watch --run npx vite",
+		"build": "vite build",
+		"start": "serve dist"
 	},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
 	"devDependencies": {
+		"serve": "^14.2.0",
 		"vite": "^4.4.8"
 	}
 }
