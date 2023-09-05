@@ -97,6 +97,12 @@ module Vec3F64 =
 
     member inline a.length() = sqrt (a.lengthSquared ())
 
+    /// creates a normalized copy of this vector
+    member inline a.normalized() = a / a.length ()
+
+    /// normalizes this vector in place
+    member inline a.normalize() = a /= a.length ()
+
     override a.ToString() =
       "Vec3("
       + a.x().ToString()

@@ -9,12 +9,11 @@ let div = document.createElement "div"
 div.innerHTML <- "Hello world form F#!"
 document.body.appendChild div |> ignore
 
-let add x y = x + y
+let width = 800
+let height = 600
 
-let color = vec3 1. 0. 0.
-let color2 = vec3 0. 1. 1.
-let cross = color.cross color2
+let canvas = document.getElementById "canvas" :?> Types.HTMLCanvasElement
+canvas.width <- width
+canvas.height <- height
 
-
-printf "1 + 2 = %f" (add 1.0 2.0)
-printf "%s %f" (cross.ToString()) (cross.length ())
+let ctx = canvas.getContext_2d ()
