@@ -2,6 +2,7 @@ module Image
 
 open Shapes
 open Vectors.Vec3F64
+open Fable.Core
 
 let inline renderImage width height (fn: int -> int -> float * float * float * float) =
   let buf = Array.zeroCreate (width * height * 4)
@@ -17,13 +18,23 @@ let inline renderImage width height (fn: int -> int -> float * float * float * f
 
   buf
 
-let inline renderRays width height (fn: Ray -> float * float * float * float) =
+type Camera =
+  { focalLength: float
+    origin: Vec3
+    direction: Vec3
+    sampleCount: int }
+
+
+let defaultCamera =
+  { focalLength = 1.
+    origin = vec3 0 0 0
+    direction = vec3 0 0 -1
+    sampleCount = 1 }
+
+let inline renderRays width height (cam: Camera) (fn: Ray -> Vec3) =
 
   let w = float width
   let h = float height
-
-  let focalLength = 1.
-  let origin = vec3 0 0 0
 
   let aspectRatio = w / h
   let viewportHeight = 2.
@@ -36,13 +47,28 @@ let inline renderRays width height (fn: Ray -> float * float * float * float) =
   let pixelDeltaV = viewportV / h
 
   let viewportTopLeft =
-    origin - viewportU / 2. - viewportV / 2. - (vec3 0 0 focalLength)
+    cam.origin - viewportU / 2. - viewportV / 2. - (vec3 0 0 cam.focalLength)
 
   let pixel00Loc = viewportTopLeft + pixelDeltaU / 2. + pixelDeltaV / 2.
 
   renderImage width height (fun x y ->
     let pixelCenter = pixel00Loc + pixelDeltaU * float x + pixelDeltaV * float y
-    let direction = pixelCenter - origin
+
+    let direction = pixelCenter - cam.origin
     direction.normalize ()
-    let r = ray origin direction
-    fn r)
+    let r = ray cam.origin direction
+    let mutable color = fn r
+
+    if cam.sampleCount > 1 then
+      for _ in 2 .. cam.sampleCount do
+        let center =
+          pixelCenter
+          + vec3 ((JS.Math.random () - 0.5) * pixelDeltaU.x) ((JS.Math.random () - 0.5) * pixelDeltaV.y) 0.
+
+        let direction = center - cam.origin
+        direction.normalize ()
+        let r = ray cam.origin direction
+        color += fn r
+
+    color /= float cam.sampleCount
+    color.toRgba 1.)
