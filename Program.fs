@@ -39,7 +39,7 @@ let buf =
           0.5 * (n + 1.)
 
         else
-          let t = 0.5 * (r.direction.y () + 1.)
+          let t = 0.5 * (r.direction.y + 1.)
           let col1 = vec3 1 1 1
           let col2 = vec3 0.5 0.7 1
           col1.lerp col2 t
