@@ -1,4 +1,4 @@
-import { class_type } from "../fable_modules/fable-library.4.1.4/Reflection.js";
+import { class_type } from "../../fable_modules/fable-library.4.1.4/Reflection.js";
 
 export class Vec3 {
     constructor(x, y, z) {
