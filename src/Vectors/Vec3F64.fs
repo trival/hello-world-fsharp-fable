@@ -95,10 +95,10 @@ type Vec3(x: float, y: float, z: float) =
   member inline a.length() = sqrt (a.lengthSquared ())
 
   /// creates a normalized copy of this vector
-  member inline a.normalized() = a / (a.length ())
+  member inline a.normalized() = a / a.length ()
 
   /// normalizes this vector in place
-  member inline a.normalize() = a /= (a.length ())
+  member inline a.normalize() = a /= a.length ()
 
   member inline a.lerp (b: Vec3) (t: float) = a * (1.0 - t) + b * t
 

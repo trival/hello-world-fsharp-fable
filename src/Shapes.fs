@@ -30,4 +30,4 @@ let intersectRaySphere ray sphere =
   if discriminant < 0. then
     -1.
   else
-    (-halfB - (sqrt discriminant)) / a
+    (-halfB - sqrt discriminant) / a

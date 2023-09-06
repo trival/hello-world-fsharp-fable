@@ -1,21 +1,21 @@
 {
-	"name": "hello-world-fsharp-fable",
-	"version": "1.0.0",
-	"description": "",
-	"main": "Program.fs.js",
-	"type": "module",
-	"scripts": {
-		"dev": "dotnet fable watch --run npx vite",
-		"build": "dotnet fable && vite build",
-		"start": "serve dist"
-	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
-	"dependencies": {
-		"serve": "^14.2.0"
-	},
-	"devDependencies": {
-		"vite": "^4.4.8"
-	}
+  "name": "ray-tracer-fsharp-fable",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Program.fs.js",
+  "type": "module",
+  "scripts": {
+    "dev": "dotnet fable watch --run npx vite --port 3000 --host",
+    "build": "dotnet fable && vite build",
+    "start": "serve dist"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "serve": "^14.2.0"
+  },
+  "devDependencies": {
+    "vite": "^4.4.8"
+  }
 }
