@@ -7,13 +7,13 @@ open Shapes
 let width = 400
 let height = 300
 
-let samplesPerPixel = 10
-let maxRayBounces = 10
+let samplesPerPixel = 20
+let maxRayBounces = 20
 
 let render () =
   let cam =
     { defaultCamera with
-        focalLength = 1.1
+        focalLength = 0.9
         sampleCount = samplesPerPixel }
 
   let world =
@@ -39,9 +39,13 @@ let render () =
 
         | Some hit ->
           if depth > 0 then
-            let direction = randomInUnitSphere ()
+            let mutable direction = randomUnitVector ()
             direction += hit.normal
             direction.normalize ()
+
+            if direction.nearZero () then
+              direction <- hit.normal
+
             let newRay = ray hit.p direction
             0.5 * getColor newRay (depth - 1)
           else

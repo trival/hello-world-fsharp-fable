@@ -114,6 +114,10 @@ type Vec3(x: float, y: float, z: float) =
 
   member inline self.toRgb = self.toRgba 1.0
 
+  member inline self.nearZero() =
+    let s = 1e-6
+    self.lengthSquared () < s
+
   override a.ToString() =
     "Vec3(" + a.x.ToString() + "," + a.y.ToString() + "," + a.z.ToString() + ")"
 

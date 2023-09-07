@@ -51,13 +51,13 @@ type Sphere =
         let sqrtD = sqrt discriminant
         let mutable t = (-halfB - sqrtD)
 
-        if t <= minT || t > maxT then
+        if t < minT || t > maxT then
           t <- (-halfB + sqrtD)
 
-          if t <= minT || t > maxT then
-            t <- minT
+          if t < minT || t > maxT then
+            t <- -1
 
-        if t = minT then
+        if t < 0 then
           None
         else
           let p = ray.at t
