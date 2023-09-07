@@ -3,12 +3,15 @@ module Image
 open Shapes
 open Vectors.Vec3F64
 open Fable.Core
+open Browser
 
 let inline renderImage width height (fn: int -> int -> float * float * float * float) =
   let buf = Array.zeroCreate (width * height * 4)
 
-  for x in 0 .. width - 1 do
-    for y in 0 .. height - 1 do
+  for y in 0 .. height - 1 do
+    // console.log ("Rendering image row", y)
+
+    for x in 0 .. width - 1 do
       let i = (x + y * width) * 4
       let (r, g, b, a) = fn x y
       buf[i] <- r

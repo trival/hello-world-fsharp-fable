@@ -9,6 +9,7 @@
 		<Compile Include="src/Vectors/*.fs" />
 		<Compile Include="src/Shapes.fs" />
 		<Compile Include="src/Image.fs" />
+		<Compile Include="src/Scene.fs" />
 		<Compile Include="Program.fs" />
 	</ItemGroup>
 
