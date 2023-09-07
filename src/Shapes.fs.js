@@ -21,14 +21,8 @@ export function Ray__at_5E38073B(r, t) {
     let b_2;
     const a_1 = r.direction;
     const b_1 = t;
-    const x = a_1.vec[0] * b_1;
-    const y = a_1.vec[1] * b_1;
-    const z = a_1.vec[2] * b_1;
-    b_2 = Vec3_$ctor_Z7AD9E565(x, y, z);
-    const x_1 = a_2.vec[0] + b_2.vec[0];
-    const y_1 = a_2.vec[1] + b_2.vec[1];
-    const z_1 = a_2.vec[2] + b_2.vec[2];
-    return Vec3_$ctor_Z7AD9E565(x_1, y_1, z_1);
+    b_2 = Vec3_$ctor_Z7AD9E565(a_1.vec[0] * b_1, a_1.vec[1] * b_1, a_1.vec[2] * b_1);
+    return Vec3_$ctor_Z7AD9E565(a_2.vec[0] + b_2.vec[0], a_2.vec[1] + b_2.vec[1], a_2.vec[2] + b_2.vec[2]);
 }
 
 export class HitRecord extends Record {
@@ -67,15 +61,12 @@ export class Sphere extends Record {
         this.radius = radius;
     }
     rayHit(ray, minT, maxT) {
-        let a_5, a_6, b_3, a_10, b_7, a_11, x_3, y_3, z_3;
+        let a_5, a_6, b_3, a_10, b_7, a_11;
         const s = this;
         let oc;
         const a = ray.origin;
         const b = s.center;
-        const x = a.vec[0] - b.vec[0];
-        const y = a.vec[1] - b.vec[1];
-        const z = a.vec[2] - b.vec[2];
-        oc = Vec3_$ctor_Z7AD9E565(x, y, z);
+        oc = Vec3_$ctor_Z7AD9E565(a.vec[0] - b.vec[0], a.vec[1] - b.vec[1], a.vec[2] - b.vec[2]);
         let a_3;
         const a_1 = ray.direction;
         const a_2 = a_1;
@@ -85,8 +76,7 @@ export class Sphere extends Record {
         const a_4 = oc;
         const b_2 = ray.direction;
         halfB = (((a_4.vec[0] * b_2.vec[0]) + (a_4.vec[1] * b_2.vec[1])) + (a_4.vec[2] * b_2.vec[2]));
-        const c = ((a_5 = oc, (a_6 = a_5, (b_3 = a_5, ((a_6.vec[0] * b_3.vec[0]) + (a_6.vec[1] * b_3.vec[1])) + (a_6.vec[2] * b_3.vec[2]))))) - (s.radius * s.radius);
-        const discriminant = (halfB * halfB) - (a_3 * c);
+        const discriminant = (halfB * halfB) - (a_3 * (((a_5 = oc, (a_6 = a_5, (b_3 = a_5, ((a_6.vec[0] * b_3.vec[0]) + (a_6.vec[1] * b_3.vec[1])) + (a_6.vec[2] * b_3.vec[2]))))) - (s.radius * s.radius)));
         if (discriminant < 0) {
             return new HitResult(1, []);
         }
@@ -110,17 +100,11 @@ export class Sphere extends Record {
                 let a_9;
                 const a_7 = p;
                 const b_4 = s.center;
-                const x_1 = a_7.vec[0] - b_4.vec[0];
-                const y_1 = a_7.vec[1] - b_4.vec[1];
-                const z_1 = a_7.vec[2] - b_4.vec[2];
-                a_9 = Vec3_$ctor_Z7AD9E565(x_1, y_1, z_1);
+                a_9 = Vec3_$ctor_Z7AD9E565(a_7.vec[0] - b_4.vec[0], a_7.vec[1] - b_4.vec[1], a_7.vec[2] - b_4.vec[2]);
                 const b_6 = 1 / s.radius;
-                const x_2 = a_9.vec[0] * b_6;
-                const y_2 = a_9.vec[1] * b_6;
-                const z_2 = a_9.vec[2] * b_6;
-                normal = Vec3_$ctor_Z7AD9E565(x_2, y_2, z_2);
+                normal = Vec3_$ctor_Z7AD9E565(a_9.vec[0] * b_6, a_9.vec[1] * b_6, a_9.vec[2] * b_6);
                 const frontFace = ((a_10 = normal, (b_7 = p_1, ((a_10.vec[0] * b_7.vec[0]) + (a_10.vec[1] * b_7.vec[1])) + (a_10.vec[2] * b_7.vec[2])))) < 0;
-                return new HitResult(0, [new HitRecord(t_1, p_1, frontFace ? normal : ((a_11 = normal, (x_3 = (a_11.vec[0] * -1), (y_3 = (a_11.vec[1] * -1), (z_3 = (a_11.vec[2] * -1), Vec3_$ctor_Z7AD9E565(x_3, y_3, z_3)))))), frontFace)]);
+                return new HitResult(0, [new HitRecord(t_1, p_1, frontFace ? normal : ((a_11 = normal, Vec3_$ctor_Z7AD9E565(a_11.vec[0] * -1, a_11.vec[1] * -1, a_11.vec[2] * -1))), frontFace)]);
             }
         }
     }

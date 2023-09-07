@@ -11,7 +11,7 @@ let render () =
   let cam =
     { defaultCamera with
         focalLength = 1.1
-        sampleCount = 40 }
+        sampleCount = 10 }
 
   let world =
     HittableList(

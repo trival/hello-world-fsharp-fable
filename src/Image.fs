@@ -9,7 +9,7 @@ let inline renderImage width height (fn: int -> int -> float * float * float * f
   let buf = Array.zeroCreate (width * height * 4)
 
   for y in 0 .. height - 1 do
-    // console.log ("Rendering image row", y)
+    console.log ("Rendering image row", y + 1)
 
     for x in 0 .. width - 1 do
       let i = (x + y * width) * 4
@@ -21,12 +21,12 @@ let inline renderImage width height (fn: int -> int -> float * float * float * f
 
   buf
 
+
 type Camera =
   { focalLength: float
     origin: Vec3
     direction: Vec3
     sampleCount: int }
-
 
 let defaultCamera =
   { focalLength = 1.
@@ -34,8 +34,8 @@ let defaultCamera =
     direction = vec3 0 0 -1
     sampleCount = 1 }
 
-let inline renderRays width height (cam: Camera) (fn: Ray -> Vec3) =
 
+let inline renderRays width height (cam: Camera) (fn: Ray -> Vec3) =
   let w = float width
   let h = float height
 
