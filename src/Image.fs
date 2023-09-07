@@ -1,8 +1,8 @@
 module Image
 
+open Utils
 open Shapes
 open Vectors.Vec3F64
-open Fable.Core
 open Browser
 
 let inline renderImage width height (fn: int -> int -> float * float * float * float) =
@@ -66,7 +66,7 @@ let inline renderRays width height (cam: Camera) (fn: Ray -> Vec3) =
       for _ in 2 .. cam.sampleCount do
         let center =
           pixelCenter
-          + vec3 ((JS.Math.random () - 0.5) * pixelDeltaU.x) ((JS.Math.random () - 0.5) * pixelDeltaV.y) 0.
+          + vec3 ((random () - 0.5) * pixelDeltaU.x) ((random () - 0.5) * pixelDeltaV.y) 0.
 
         let direction = center - cam.origin
         direction.normalize ()

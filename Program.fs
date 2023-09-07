@@ -4,6 +4,7 @@ open Browser
 open Fable.Core.JsInterop
 open Fable.Core
 open Scene
+open Utils
 
 let canvas = document.getElementById "canvas" :?> Types.HTMLCanvasElement
 canvas.width <- width
@@ -21,7 +22,7 @@ document.body.appendChild div |> ignore
 let ctx = canvas.getContext_2d ()
 
 let colorBufferToBytes (buf: float array) =
-  buf |> Array.map (fun v -> byte (v * 255.))
+  buf |> Array.map (fun v -> byte ((clamp 0. 1 v) * 255.))
 
 let start () =
   let timeBefore = JS.Constructors.Date.now ()

@@ -12,27 +12,24 @@ let inline ray origin direction =
   { origin = origin
     direction = direction }
 
-type HitRecord =
+type Hit =
   { t: float
     p: Vec3
     normal: Vec3
     frontFace: bool }
 
-type HitResult =
-  | Hit of HitRecord
-  | Miss
 
 let inline hit t p (normal: Vec3) =
   let frontFace = normal.dot p < 0.
 
-  Hit
-    { t = t
-      p = p
-      normal = if frontFace then normal else normal * -1.
-      frontFace = frontFace }
+  { t = t
+    p = p
+    normal = if frontFace then normal else normal * -1.
+    frontFace = frontFace }
+
 
 type Hittable =
-  abstract member rayHit: Ray -> minT: float -> maxT: float -> HitResult
+  abstract member rayHit: Ray -> minT: float -> maxT: float -> Hit option
 
 type Sphere =
   { center: Vec3
@@ -44,29 +41,28 @@ type Sphere =
     member s.rayHit ray minT maxT =
 
       let oc = ray.origin - s.center
-      let a = ray.direction.lengthSquared ()
       let halfB = oc.dot ray.direction
       let c = oc.lengthSquared () - s.radius * s.radius
-      let discriminant = halfB * halfB - a * c
+      let discriminant = halfB * halfB - c
 
       if discriminant < 0. then
-        Miss
+        None
       else
         let sqrtD = sqrt discriminant
-        let mutable t = (-halfB - sqrtD) / a
+        let mutable t = (-halfB - sqrtD)
 
         if t <= minT || t > maxT then
-          t <- (-halfB + sqrtD) / a
+          t <- (-halfB + sqrtD)
 
           if t <= minT || t > maxT then
             t <- minT
 
         if t = minT then
-          Miss
+          None
         else
           let p = ray.at t
 
-          hit t p ((p - s.center) / s.radius)
+          Some(hit t p ((p - s.center) / s.radius))
 
 
 let inline sphere center radius = { center = center; radius = radius }
@@ -78,13 +74,13 @@ type HittableList(hs: Hittable seq) =
   interface Hittable with
     member _.rayHit ray minT maxT =
       let mutable closestSoFar = maxT
-      let mutable closestHit = Miss
+      let mutable closestHit = None
 
       for h in hs do
         match h.rayHit ray minT closestSoFar with
-        | Hit hit ->
+        | Some hit ->
           closestSoFar <- hit.t
-          closestHit <- Hit hit
-        | Miss -> ()
+          closestHit <- Some hit
+        | None -> ()
 
       closestHit

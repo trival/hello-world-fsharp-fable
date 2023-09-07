@@ -1,5 +1,6 @@
 import { render, height, width } from "./src/Scene.fs.js";
 import { map } from "./fable_modules/fable-library.4.1.4/Array.js";
+import { clamp } from "./src/Utils.fs.js";
 
 export const canvas = document.getElementById("canvas");
 
@@ -22,7 +23,7 @@ document.body.appendChild(div);
 export const ctx = canvas.getContext('2d');
 
 export function colorBufferToBytes(buf) {
-    return map((v) => ((v * 255) & 0xFF), buf, Uint8Array);
+    return map((v) => ((clamp(0, 1, v) * 255) & 0xFF), buf, Uint8Array);
 }
 
 export function start() {

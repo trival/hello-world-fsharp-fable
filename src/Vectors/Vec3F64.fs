@@ -1,5 +1,7 @@
 module Vectors.Vec3F64
 
+open Utils
+
 type Vec3(x: float, y: float, z: float) =
 
   let vec = [| x; y; z |]
@@ -110,7 +112,37 @@ type Vec3(x: float, y: float, z: float) =
 
   member inline self.toRgba a = (self.x, self.y, self.z, a)
 
+  member inline self.toRgb = self.toRgba 1.0
+
   override a.ToString() =
     "Vec3(" + a.x.ToString() + "," + a.y.ToString() + "," + a.z.ToString() + ")"
 
 let inline vec3 x y z = Vec3(x, y, z)
+
+let inline vec3_1 x = Vec3(x, x, x)
+
+let inline randomVec3 () =
+  vec3 (random ()) (random ()) (random ())
+
+let inline randomRangeVec3 (min: Vec3) (max: Vec3) =
+  vec3 (randomRange min.x max.x) (randomRange min.y max.y) (randomRange min.z max.z)
+
+let inline randomInUnitSphere () =
+  let rec loop () =
+    let p = randomRangeVec3 (vec3_1 -1.0) (vec3_1 1.0)
+    if p.lengthSquared () >= 1.0 then loop () else p
+
+  loop ()
+
+let inline randomUnitVector () =
+  let n = randomInUnitSphere ()
+  n.normalize ()
+  n
+
+let inline randomInHemisphere (normal: Vec3) =
+  let inUnitSphere = randomInUnitSphere ()
+
+  if inUnitSphere.dot normal < 0.0 then
+    inUnitSphere *= -1.0
+
+  inUnitSphere
