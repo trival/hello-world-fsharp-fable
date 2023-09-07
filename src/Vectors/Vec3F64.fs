@@ -4,15 +4,15 @@ type Vec3(x: float, y: float, z: float) =
 
   let vec = [| x; y; z |]
 
-  member inline a.x
+  member inline _.x
     with get () = vec[0]
     and set x = vec[0] <- x
 
-  member inline a.y
+  member inline _.y
     with get () = vec[1]
     and set y = vec[1] <- y
 
-  member inline a.z
+  member inline _.z
     with get () = vec[2]
     and set z = vec[2] <- z
 

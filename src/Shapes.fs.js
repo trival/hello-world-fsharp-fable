@@ -17,7 +17,7 @@ export function Ray_$reflection() {
 }
 
 export function Ray__at_5E38073B(r, t) {
-    const a_5 = r.origin;
+    const a_2 = r.origin;
     let b_2;
     const a_1 = r.direction;
     const b_1 = t;
@@ -25,9 +25,9 @@ export function Ray__at_5E38073B(r, t) {
     const y = a_1.vec[1] * b_1;
     const z = a_1.vec[2] * b_1;
     b_2 = Vec3_$ctor_Z7AD9E565(x, y, z);
-    const x_1 = a_5.vec[0] + b_2.vec[0];
-    const y_1 = a_5.vec[1] + b_2.vec[1];
-    const z_1 = a_5.vec[2] + b_2.vec[2];
+    const x_1 = a_2.vec[0] + b_2.vec[0];
+    const y_1 = a_2.vec[1] + b_2.vec[1];
+    const z_1 = a_2.vec[2] + b_2.vec[2];
     return Vec3_$ctor_Z7AD9E565(x_1, y_1, z_1);
 }
 
@@ -67,7 +67,7 @@ export class Sphere extends Record {
         this.radius = radius;
     }
     rayHit(ray, minT, maxT) {
-        let a_23, a_24, b_3, a_43, b_7, a_50, x_3, y_3, z_3;
+        let a_5, a_6, b_3, a_10, b_7, a_11, x_3, y_3, z_3;
         const s = this;
         let oc;
         const a = ray.origin;
@@ -76,25 +76,25 @@ export class Sphere extends Record {
         const y = a.vec[1] - b.vec[1];
         const z = a.vec[2] - b.vec[2];
         oc = Vec3_$ctor_Z7AD9E565(x, y, z);
-        let a_15;
-        const a_7 = ray.direction;
-        const a_8 = a_7;
-        const b_1 = a_7;
-        a_15 = (((a_8.vec[0] * b_1.vec[0]) + (a_8.vec[1] * b_1.vec[1])) + (a_8.vec[2] * b_1.vec[2]));
+        let a_3;
+        const a_1 = ray.direction;
+        const a_2 = a_1;
+        const b_1 = a_1;
+        a_3 = (((a_2.vec[0] * b_1.vec[0]) + (a_2.vec[1] * b_1.vec[1])) + (a_2.vec[2] * b_1.vec[2]));
         let halfB;
-        const a_16 = oc;
+        const a_4 = oc;
         const b_2 = ray.direction;
-        halfB = (((a_16.vec[0] * b_2.vec[0]) + (a_16.vec[1] * b_2.vec[1])) + (a_16.vec[2] * b_2.vec[2]));
-        const c = ((a_23 = oc, (a_24 = a_23, (b_3 = a_23, ((a_24.vec[0] * b_3.vec[0]) + (a_24.vec[1] * b_3.vec[1])) + (a_24.vec[2] * b_3.vec[2]))))) - (s.radius * s.radius);
-        const discriminant = (halfB * halfB) - (a_15 * c);
+        halfB = (((a_4.vec[0] * b_2.vec[0]) + (a_4.vec[1] * b_2.vec[1])) + (a_4.vec[2] * b_2.vec[2]));
+        const c = ((a_5 = oc, (a_6 = a_5, (b_3 = a_5, ((a_6.vec[0] * b_3.vec[0]) + (a_6.vec[1] * b_3.vec[1])) + (a_6.vec[2] * b_3.vec[2]))))) - (s.radius * s.radius);
+        const discriminant = (halfB * halfB) - (a_3 * c);
         if (discriminant < 0) {
             return new HitResult(1, []);
         }
         else {
             const sqrtD = Math.sqrt(discriminant);
-            let t = (-halfB - sqrtD) / a_15;
+            let t = (-halfB - sqrtD) / a_3;
             if ((t <= minT) ? true : (t > maxT)) {
-                t = ((-halfB + sqrtD) / a_15);
+                t = ((-halfB + sqrtD) / a_3);
                 if ((t <= minT) ? true : (t > maxT)) {
                     t = minT;
                 }
@@ -107,20 +107,20 @@ export class Sphere extends Record {
                 const t_1 = t;
                 const p_1 = p;
                 let normal;
-                let a_39;
-                const a_31 = p;
+                let a_9;
+                const a_7 = p;
                 const b_4 = s.center;
-                const x_1 = a_31.vec[0] - b_4.vec[0];
-                const y_1 = a_31.vec[1] - b_4.vec[1];
-                const z_1 = a_31.vec[2] - b_4.vec[2];
-                a_39 = Vec3_$ctor_Z7AD9E565(x_1, y_1, z_1);
+                const x_1 = a_7.vec[0] - b_4.vec[0];
+                const y_1 = a_7.vec[1] - b_4.vec[1];
+                const z_1 = a_7.vec[2] - b_4.vec[2];
+                a_9 = Vec3_$ctor_Z7AD9E565(x_1, y_1, z_1);
                 const b_6 = 1 / s.radius;
-                const x_2 = a_39.vec[0] * b_6;
-                const y_2 = a_39.vec[1] * b_6;
-                const z_2 = a_39.vec[2] * b_6;
+                const x_2 = a_9.vec[0] * b_6;
+                const y_2 = a_9.vec[1] * b_6;
+                const z_2 = a_9.vec[2] * b_6;
                 normal = Vec3_$ctor_Z7AD9E565(x_2, y_2, z_2);
-                const frontFace = ((a_43 = normal, (b_7 = p_1, ((a_43.vec[0] * b_7.vec[0]) + (a_43.vec[1] * b_7.vec[1])) + (a_43.vec[2] * b_7.vec[2])))) < 0;
-                return new HitResult(0, [new HitRecord(t_1, p_1, frontFace ? normal : ((a_50 = normal, (x_3 = (a_50.vec[0] * -1), (y_3 = (a_50.vec[1] * -1), (z_3 = (a_50.vec[2] * -1), Vec3_$ctor_Z7AD9E565(x_3, y_3, z_3)))))), frontFace)]);
+                const frontFace = ((a_10 = normal, (b_7 = p_1, ((a_10.vec[0] * b_7.vec[0]) + (a_10.vec[1] * b_7.vec[1])) + (a_10.vec[2] * b_7.vec[2])))) < 0;
+                return new HitResult(0, [new HitRecord(t_1, p_1, frontFace ? normal : ((a_11 = normal, (x_3 = (a_11.vec[0] * -1), (y_3 = (a_11.vec[1] * -1), (z_3 = (a_11.vec[2] * -1), Vec3_$ctor_Z7AD9E565(x_3, y_3, z_3)))))), frontFace)]);
             }
         }
     }
@@ -135,10 +135,10 @@ export class HittableList {
         this.hs = hs;
     }
     rayHit(ray, minT, maxT) {
-        const this$ = this;
+        const _ = this;
         let closestSoFar = maxT;
         let closestHit = new HitResult(1, []);
-        const enumerator = getEnumerator(this$.hs);
+        const enumerator = getEnumerator(_.hs);
         try {
             while (enumerator["System.Collections.IEnumerator.MoveNext"]()) {
                 const h = enumerator["System.Collections.Generic.IEnumerator`1.get_Current"]();

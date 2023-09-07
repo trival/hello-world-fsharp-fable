@@ -31,12 +31,12 @@ let newData = ImageData.Create(width, height)
 let buf =
   let world =
     HittableList(
-      seq {
-        yield sphere (vec3 0 0 -1) 0.5
-        yield sphere (vec3 -1 0 -1) 0.5
-        yield sphere (vec3 1 0 -1) 0.5
-        yield sphere (vec3 0 -100.5 -1) 100.0
-      }
+      [ HittableList(
+          [ sphere (vec3 0 0 -1) 0.5
+            sphere (vec3 -1 0 -1) 0.5
+            sphere (vec3 1 0 -1) 0.5 ]
+        )
+        sphere (vec3 0 -100.5 -1) 100.0 ]
     )
 
   (colorBufferToBytes (

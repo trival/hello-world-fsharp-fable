@@ -76,7 +76,7 @@ type HittableList(hs: Hittable seq) =
   member inline s.rayHit ray minT maxT = (s :> Hittable).rayHit ray minT maxT
 
   interface Hittable with
-    member this.rayHit ray minT maxT =
+    member _.rayHit ray minT maxT =
       let mutable closestSoFar = maxT
       let mutable closestHit = Miss
 
