@@ -18,16 +18,6 @@ type Hit =
     normal: Vec3
     frontFace: bool }
 
-
-let inline hit t p (normal: Vec3) =
-  let frontFace = normal.dot p < 0.
-
-  { t = t
-    p = p
-    normal = if frontFace then normal else normal * -1.
-    frontFace = frontFace }
-
-
 type Hittable =
   abstract member rayHit: Ray -> minT: float -> maxT: float -> Hit option
 
@@ -61,8 +51,18 @@ type Sphere =
           None
         else
           let p = ray.at t
+          let normal = (p - s.center) / s.radius
+          let frontFace = ray.direction.dot normal < 0.
 
-          Some(hit t p ((p - s.center) / s.radius))
+          if not frontFace then
+            normal *= -1.
+
+          Some(
+            { t = t
+              p = p
+              normal = normal
+              frontFace = frontFace }
+          )
 
 
 let inline sphere center radius = { center = center; radius = radius }

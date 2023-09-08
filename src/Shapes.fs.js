@@ -21,8 +21,14 @@ export function Ray__at_5E38073B(r, t) {
     let b_2;
     const a_1 = r.direction;
     const b_1 = t;
-    b_2 = Vec3_$ctor_Z7AD9E565(a_1.X * b_1, a_1.Y * b_1, a_1.Z * b_1);
-    return Vec3_$ctor_Z7AD9E565(a_2.X + b_2.X, a_2.Y + b_2.Y, a_2.Z + b_2.Z);
+    const x = a_1.X * b_1;
+    const y = a_1.Y * b_1;
+    const z = a_1.Z * b_1;
+    b_2 = Vec3_$ctor_Z7AD9E565(x, y, z);
+    const x_1 = a_2.X + b_2.X;
+    const y_1 = a_2.Y + b_2.Y;
+    const z_1 = a_2.Z + b_2.Z;
+    return Vec3_$ctor_Z7AD9E565(x_1, y_1, z_1);
 }
 
 export class Hit extends Record {
@@ -46,17 +52,21 @@ export class Sphere extends Record {
         this.radius = radius;
     }
     rayHit(ray, minT, maxT) {
-        let a_2, a_3, b_2, t_1, p_1, normal, a_6, a_4, b_3, b_5, frontFace, a_7, b_6, a_8;
+        let a_2, a_3, b_2, a_7, b_6;
         const s = this;
         let oc;
         const a = ray.origin;
         const b = s.center;
-        oc = Vec3_$ctor_Z7AD9E565(a.X - b.X, a.Y - b.Y, a.Z - b.Z);
+        const x = a.X - b.X;
+        const y = a.Y - b.Y;
+        const z = a.Z - b.Z;
+        oc = Vec3_$ctor_Z7AD9E565(x, y, z);
         let halfB;
         const a_1 = oc;
         const b_1 = ray.direction;
         halfB = (((a_1.X * b_1.X) + (a_1.Y * b_1.Y)) + (a_1.Z * b_1.Z));
-        const discriminant = (halfB * halfB) - (((a_2 = oc, (a_3 = a_2, (b_2 = a_2, ((a_3.X * b_2.X) + (a_3.Y * b_2.Y)) + (a_3.Z * b_2.Z))))) - (s.radius * s.radius));
+        const c = ((a_2 = oc, (a_3 = a_2, (b_2 = a_2, ((a_3.X * b_2.X) + (a_3.Y * b_2.Y)) + (a_3.Z * b_2.Z))))) - (s.radius * s.radius);
+        const discriminant = (halfB * halfB) - c;
         if (discriminant < 0) {
             return void 0;
         }
@@ -74,7 +84,30 @@ export class Sphere extends Record {
             }
             else {
                 const p = Ray__at_5E38073B(ray, t);
-                return (t_1 = t, (p_1 = p, (normal = ((a_6 = ((a_4 = p, (b_3 = s.center, Vec3_$ctor_Z7AD9E565(a_4.X - b_3.X, a_4.Y - b_3.Y, a_4.Z - b_3.Z)))), (b_5 = (1 / s.radius), Vec3_$ctor_Z7AD9E565(a_6.X * b_5, a_6.Y * b_5, a_6.Z * b_5)))), (frontFace = (((a_7 = normal, (b_6 = p_1, ((a_7.X * b_6.X) + (a_7.Y * b_6.Y)) + (a_7.Z * b_6.Z)))) < 0), new Hit(t_1, p_1, frontFace ? normal : ((a_8 = normal, Vec3_$ctor_Z7AD9E565(a_8.X * -1, a_8.Y * -1, a_8.Z * -1))), frontFace)))));
+                let normal;
+                let a_6;
+                const a_4 = p;
+                const b_3 = s.center;
+                const x_1 = a_4.X - b_3.X;
+                const y_1 = a_4.Y - b_3.Y;
+                const z_1 = a_4.Z - b_3.Z;
+                a_6 = Vec3_$ctor_Z7AD9E565(x_1, y_1, z_1);
+                const b_5 = 1 / s.radius;
+                const x_2 = a_6.X * b_5;
+                const y_2 = a_6.Y * b_5;
+                const z_2 = a_6.Z * b_5;
+                normal = Vec3_$ctor_Z7AD9E565(x_2, y_2, z_2);
+                const frontFace = ((a_7 = ray.direction, (b_6 = normal, ((a_7.X * b_6.X) + (a_7.Y * b_6.Y)) + (a_7.Z * b_6.Z)))) < 0;
+                if (!frontFace) {
+                    const a_8 = normal;
+                    const x_3 = a_8.X * -1;
+                    a_8.X = x_3;
+                    const y_3 = a_8.Y * -1;
+                    a_8.Y = y_3;
+                    const z_3 = a_8.Z * -1;
+                    a_8.Z = z_3;
+                }
+                return new Hit(t, p, normal, frontFace);
             }
         }
     }
