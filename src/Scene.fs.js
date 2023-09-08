@@ -30,8 +30,8 @@ export function render() {
                         let p;
                         const min = Vec3_$ctor_Z7AD9E565(-1, -1, -1);
                         const max = Vec3_$ctor_Z7AD9E565(1, 1, 1);
-                        p = Vec3_$ctor_Z7AD9E565((min_1 = min.vec[0], min_1 + ((max.vec[0] - min_1) * Math.random())), (min_2 = min.vec[1], min_2 + ((max.vec[1] - min_2) * Math.random())), (min_3 = min.vec[2], min_3 + ((max.vec[2] - min_3) * Math.random())));
-                        if (((a_4 = p, (a_5 = a_4, (b_4 = a_4, ((a_5.vec[0] * b_4.vec[0]) + (a_5.vec[1] * b_4.vec[1])) + (a_5.vec[2] * b_4.vec[2]))))) >= 1) {
+                        p = Vec3_$ctor_Z7AD9E565((min_1 = min.X, min_1 + ((max.X - min_1) * Math.random())), (min_2 = min.Y, min_2 + ((max.Y - min_2) * Math.random())), (min_3 = min.Z, min_3 + ((max.Z - min_3) * Math.random())));
+                        if (((a_4 = p, (a_5 = a_4, (b_4 = a_4, ((a_5.X * b_4.X) + (a_5.Y * b_4.Y)) + (a_5.Z * b_4.Z))))) >= 1) {
                             return loop();
                         }
                         else {
@@ -41,59 +41,59 @@ export function render() {
                     n = loop();
                     const a_6 = n;
                     const a_11 = a_6;
-                    const b_7 = 1 / Math.sqrt((a_8 = a_6, (a_9 = a_8, (b_5 = a_8, ((a_9.vec[0] * b_5.vec[0]) + (a_9.vec[1] * b_5.vec[1])) + (a_9.vec[2] * b_5.vec[2])))));
-                    const x_12 = a_11.vec[0] * b_7;
-                    a_11.vec[0] = x_12;
-                    const y_10 = a_11.vec[1] * b_7;
-                    a_11.vec[1] = y_10;
-                    const z_10 = a_11.vec[2] * b_7;
-                    a_11.vec[2] = z_10;
+                    const b_7 = 1 / Math.sqrt((a_8 = a_6, (a_9 = a_8, (b_5 = a_8, ((a_9.X * b_5.X) + (a_9.Y * b_5.Y)) + (a_9.Z * b_5.Z)))));
+                    const x_12 = a_11.X * b_7;
+                    a_11.X = x_12;
+                    const y_10 = a_11.Y * b_7;
+                    a_11.Y = y_10;
+                    const z_10 = a_11.Z * b_7;
+                    a_11.Z = z_10;
                     direction = n;
                     const a_12 = direction;
                     const b_8 = hit.normal;
-                    const x_13 = a_12.vec[0] + b_8.vec[0];
-                    a_12.vec[0] = x_13;
-                    const y_11 = a_12.vec[1] + b_8.vec[1];
-                    a_12.vec[1] = y_11;
-                    const z_11 = a_12.vec[2] + b_8.vec[2];
-                    a_12.vec[2] = z_11;
+                    const x_13 = a_12.X + b_8.X;
+                    a_12.X = x_13;
+                    const y_11 = a_12.Y + b_8.Y;
+                    a_12.Y = y_11;
+                    const z_11 = a_12.Z + b_8.Z;
+                    a_12.Z = z_11;
                     const a_13 = direction;
                     const a_18 = a_13;
-                    const b_11 = 1 / Math.sqrt((a_15 = a_13, (a_16 = a_15, (b_9 = a_15, ((a_16.vec[0] * b_9.vec[0]) + (a_16.vec[1] * b_9.vec[1])) + (a_16.vec[2] * b_9.vec[2])))));
-                    const x_14 = a_18.vec[0] * b_11;
-                    a_18.vec[0] = x_14;
-                    const y_12 = a_18.vec[1] * b_11;
-                    a_18.vec[1] = y_12;
-                    const z_12 = a_18.vec[2] * b_11;
-                    a_18.vec[2] = z_12;
-                    if (((a_19 = direction, (a_20 = a_19, (b_12 = a_19, ((a_20.vec[0] * b_12.vec[0]) + (a_20.vec[1] * b_12.vec[1])) + (a_20.vec[2] * b_12.vec[2]))))) < 1E-06) {
+                    const b_11 = 1 / Math.sqrt((a_15 = a_13, (a_16 = a_15, (b_9 = a_15, ((a_16.X * b_9.X) + (a_16.Y * b_9.Y)) + (a_16.Z * b_9.Z)))));
+                    const x_14 = a_18.X * b_11;
+                    a_18.X = x_14;
+                    const y_12 = a_18.Y * b_11;
+                    a_18.Y = y_12;
+                    const z_12 = a_18.Z * b_11;
+                    a_18.Z = z_12;
+                    if (((a_19 = direction, (a_20 = a_19, (b_12 = a_19, ((a_20.X * b_12.X) + (a_20.Y * b_12.Y)) + (a_20.Z * b_12.Z))))) < 1E-06) {
                         direction = hit.normal;
                     }
                     const a_22 = getColor(new Ray(hit.p, direction), depth - 1);
-                    return Vec3_$ctor_Z7AD9E565(a_22.vec[0] * 0.5, a_22.vec[1] * 0.5, a_22.vec[2] * 0.5);
+                    return Vec3_$ctor_Z7AD9E565(a_22.X * 0.5, a_22.Y * 0.5, a_22.Z * 0.5);
                 }
                 else {
                     return Vec3_$ctor_Z7AD9E565(0, 0, 0);
                 }
             }
             else {
-                const t = 0.5 * (r_1.direction.vec[1] + 1);
+                const t = 0.5 * (r_1.direction.Y + 1);
                 const col1 = Vec3_$ctor_Z7AD9E565(1, 1, 1);
                 const arg_4 = Vec3_$ctor_Z7AD9E565(0.5, 0.7, 1);
                 const t_1 = t;
                 let a_3;
                 const a_1 = col1;
                 const b_1 = 1 - t_1;
-                a_3 = Vec3_$ctor_Z7AD9E565(a_1.vec[0] * b_1, a_1.vec[1] * b_1, a_1.vec[2] * b_1);
+                a_3 = Vec3_$ctor_Z7AD9E565(a_1.X * b_1, a_1.Y * b_1, a_1.Z * b_1);
                 let b_3;
                 const a_2 = arg_4;
                 const b_2 = t_1;
-                b_3 = Vec3_$ctor_Z7AD9E565(a_2.vec[0] * b_2, a_2.vec[1] * b_2, a_2.vec[2] * b_2);
-                return Vec3_$ctor_Z7AD9E565(a_3.vec[0] + b_3.vec[0], a_3.vec[1] + b_3.vec[1], a_3.vec[2] + b_3.vec[2]);
+                b_3 = Vec3_$ctor_Z7AD9E565(a_2.X * b_2, a_2.Y * b_2, a_2.Z * b_2);
+                return Vec3_$ctor_Z7AD9E565(a_3.X + b_3.X, a_3.Y + b_3.Y, a_3.Z + b_3.Z);
             }
         };
         return getColor(r, maxRayBounces);
-    }), (w = width_1, (h = height_1, (viewportU = Vec3_$ctor_Z7AD9E565((w / h) * 2, 0, 0), (viewportV = Vec3_$ctor_Z7AD9E565(0, -2, 0), (pixelDeltaU = ((a_24 = viewportU, (b_16 = (1 / w), Vec3_$ctor_Z7AD9E565(a_24.vec[0] * b_16, a_24.vec[1] * b_16, a_24.vec[2] * b_16)))), (pixelDeltaV = ((a_26 = viewportV, (b_18 = (1 / h), Vec3_$ctor_Z7AD9E565(a_26.vec[0] * b_18, a_26.vec[1] * b_18, a_26.vec[2] * b_18)))), (pixel00Loc = ((a_39 = ((a_36 = ((a_33 = ((a_32 = ((a_29 = cam_1.origin, (b_21 = ((a_28 = viewportU, (b_20 = (1 / 2), Vec3_$ctor_Z7AD9E565(a_28.vec[0] * b_20, a_28.vec[1] * b_20, a_28.vec[2] * b_20)))), Vec3_$ctor_Z7AD9E565(a_29.vec[0] - b_21.vec[0], a_29.vec[1] - b_21.vec[1], a_29.vec[2] - b_21.vec[2])))), (b_24 = ((a_31 = viewportV, (b_23 = (1 / 2), Vec3_$ctor_Z7AD9E565(a_31.vec[0] * b_23, a_31.vec[1] * b_23, a_31.vec[2] * b_23)))), Vec3_$ctor_Z7AD9E565(a_32.vec[0] - b_24.vec[0], a_32.vec[1] - b_24.vec[1], a_32.vec[2] - b_24.vec[2])))), (b_25 = Vec3_$ctor_Z7AD9E565(0, 0, cam_1.focalLength), Vec3_$ctor_Z7AD9E565(a_33.vec[0] - b_25.vec[0], a_33.vec[1] - b_25.vec[1], a_33.vec[2] - b_25.vec[2])))), (b_28 = ((a_35 = pixelDeltaU, (b_27 = (1 / 2), Vec3_$ctor_Z7AD9E565(a_35.vec[0] * b_27, a_35.vec[1] * b_27, a_35.vec[2] * b_27)))), Vec3_$ctor_Z7AD9E565(a_36.vec[0] + b_28.vec[0], a_36.vec[1] + b_28.vec[1], a_36.vec[2] + b_28.vec[2])))), (b_31 = ((a_38 = pixelDeltaV, (b_30 = (1 / 2), Vec3_$ctor_Z7AD9E565(a_38.vec[0] * b_30, a_38.vec[1] * b_30, a_38.vec[2] * b_30)))), Vec3_$ctor_Z7AD9E565(a_39.vec[0] + b_31.vec[0], a_39.vec[1] + b_31.vec[1], a_39.vec[2] + b_31.vec[2])))), (width_2 = (width_1 | 0), (height_2 = (height_1 | 0), (buf = (new Float64Array((width_2 * height_2) * 4)), ((() => {
+    }), (w = width_1, (h = height_1, (viewportU = Vec3_$ctor_Z7AD9E565((w / h) * 2, 0, 0), (viewportV = Vec3_$ctor_Z7AD9E565(0, -2, 0), (pixelDeltaU = ((a_24 = viewportU, (b_16 = (1 / w), Vec3_$ctor_Z7AD9E565(a_24.X * b_16, a_24.Y * b_16, a_24.Z * b_16)))), (pixelDeltaV = ((a_26 = viewportV, (b_18 = (1 / h), Vec3_$ctor_Z7AD9E565(a_26.X * b_18, a_26.Y * b_18, a_26.Z * b_18)))), (pixel00Loc = ((a_39 = ((a_36 = ((a_33 = ((a_32 = ((a_29 = cam_1.origin, (b_21 = ((a_28 = viewportU, (b_20 = (1 / 2), Vec3_$ctor_Z7AD9E565(a_28.X * b_20, a_28.Y * b_20, a_28.Z * b_20)))), Vec3_$ctor_Z7AD9E565(a_29.X - b_21.X, a_29.Y - b_21.Y, a_29.Z - b_21.Z)))), (b_24 = ((a_31 = viewportV, (b_23 = (1 / 2), Vec3_$ctor_Z7AD9E565(a_31.X * b_23, a_31.Y * b_23, a_31.Z * b_23)))), Vec3_$ctor_Z7AD9E565(a_32.X - b_24.X, a_32.Y - b_24.Y, a_32.Z - b_24.Z)))), (b_25 = Vec3_$ctor_Z7AD9E565(0, 0, cam_1.focalLength), Vec3_$ctor_Z7AD9E565(a_33.X - b_25.X, a_33.Y - b_25.Y, a_33.Z - b_25.Z)))), (b_28 = ((a_35 = pixelDeltaU, (b_27 = (1 / 2), Vec3_$ctor_Z7AD9E565(a_35.X * b_27, a_35.Y * b_27, a_35.Z * b_27)))), Vec3_$ctor_Z7AD9E565(a_36.X + b_28.X, a_36.Y + b_28.Y, a_36.Z + b_28.Z)))), (b_31 = ((a_38 = pixelDeltaV, (b_30 = (1 / 2), Vec3_$ctor_Z7AD9E565(a_38.X * b_30, a_38.Y * b_30, a_38.Z * b_30)))), Vec3_$ctor_Z7AD9E565(a_39.X + b_31.X, a_39.Y + b_31.Y, a_39.Z + b_31.Z)))), (width_2 = (width_1 | 0), (height_2 = (height_1 | 0), (buf = (new Float64Array((width_2 * height_2) * 4)), ((() => {
         let a_47, a_48, b_37, a_55, a_56, b_42;
         for (let y_42 = 0; y_42 <= (height_2 - 1); y_42++) {
             console.log(some("Rendering image row"), y_42 + 1);
@@ -106,66 +106,66 @@ export function render() {
                 let b_33;
                 const a_40 = pixelDeltaU;
                 const b_32 = x_44;
-                b_33 = Vec3_$ctor_Z7AD9E565(a_40.vec[0] * b_32, a_40.vec[1] * b_32, a_40.vec[2] * b_32);
-                a_43 = Vec3_$ctor_Z7AD9E565(a_41.vec[0] + b_33.vec[0], a_41.vec[1] + b_33.vec[1], a_41.vec[2] + b_33.vec[2]);
+                b_33 = Vec3_$ctor_Z7AD9E565(a_40.X * b_32, a_40.Y * b_32, a_40.Z * b_32);
+                a_43 = Vec3_$ctor_Z7AD9E565(a_41.X + b_33.X, a_41.Y + b_33.Y, a_41.Z + b_33.Z);
                 let b_35;
                 const a_42 = pixelDeltaV;
                 const b_34 = y_42;
-                b_35 = Vec3_$ctor_Z7AD9E565(a_42.vec[0] * b_34, a_42.vec[1] * b_34, a_42.vec[2] * b_34);
-                pixelCenter = Vec3_$ctor_Z7AD9E565(a_43.vec[0] + b_35.vec[0], a_43.vec[1] + b_35.vec[1], a_43.vec[2] + b_35.vec[2]);
+                b_35 = Vec3_$ctor_Z7AD9E565(a_42.X * b_34, a_42.Y * b_34, a_42.Z * b_34);
+                pixelCenter = Vec3_$ctor_Z7AD9E565(a_43.X + b_35.X, a_43.Y + b_35.Y, a_43.Z + b_35.Z);
                 let direction_2;
                 const a_44 = pixelCenter;
                 const b_36 = cam_1.origin;
-                direction_2 = Vec3_$ctor_Z7AD9E565(a_44.vec[0] - b_36.vec[0], a_44.vec[1] - b_36.vec[1], a_44.vec[2] - b_36.vec[2]);
+                direction_2 = Vec3_$ctor_Z7AD9E565(a_44.X - b_36.X, a_44.Y - b_36.Y, a_44.Z - b_36.Z);
                 const a_45 = direction_2;
                 const a_50 = a_45;
-                const b_39 = 1 / Math.sqrt((a_47 = a_45, (a_48 = a_47, (b_37 = a_47, ((a_48.vec[0] * b_37.vec[0]) + (a_48.vec[1] * b_37.vec[1])) + (a_48.vec[2] * b_37.vec[2])))));
-                const x_37 = a_50.vec[0] * b_39;
-                a_50.vec[0] = x_37;
-                const y_35 = a_50.vec[1] * b_39;
-                a_50.vec[1] = y_35;
-                const z_34 = a_50.vec[2] * b_39;
-                a_50.vec[2] = z_34;
+                const b_39 = 1 / Math.sqrt((a_47 = a_45, (a_48 = a_47, (b_37 = a_47, ((a_48.X * b_37.X) + (a_48.Y * b_37.Y)) + (a_48.Z * b_37.Z)))));
+                const x_37 = a_50.X * b_39;
+                a_50.X = x_37;
+                const y_35 = a_50.Y * b_39;
+                a_50.Y = y_35;
+                const z_34 = a_50.Z * b_39;
+                a_50.Z = z_34;
                 let color = fn(new Ray(cam_1.origin, direction_2));
                 if (cam_1.sampleCount > 1) {
                     for (let forLoopVar = 2; forLoopVar <= cam_1.sampleCount; forLoopVar++) {
                         let direction_1_1;
                         let a_52;
                         const a_51 = pixelCenter;
-                        const b_40 = Vec3_$ctor_Z7AD9E565((Math.random() - 0.5) * pixelDeltaU.vec[0], (Math.random() - 0.5) * pixelDeltaV.vec[1], 0);
-                        a_52 = Vec3_$ctor_Z7AD9E565(a_51.vec[0] + b_40.vec[0], a_51.vec[1] + b_40.vec[1], a_51.vec[2] + b_40.vec[2]);
+                        const b_40 = Vec3_$ctor_Z7AD9E565((Math.random() - 0.5) * pixelDeltaU.X, (Math.random() - 0.5) * pixelDeltaV.Y, 0);
+                        a_52 = Vec3_$ctor_Z7AD9E565(a_51.X + b_40.X, a_51.Y + b_40.Y, a_51.Z + b_40.Z);
                         const b_41 = cam_1.origin;
-                        direction_1_1 = Vec3_$ctor_Z7AD9E565(a_52.vec[0] - b_41.vec[0], a_52.vec[1] - b_41.vec[1], a_52.vec[2] - b_41.vec[2]);
+                        direction_1_1 = Vec3_$ctor_Z7AD9E565(a_52.X - b_41.X, a_52.Y - b_41.Y, a_52.Z - b_41.Z);
                         const a_53 = direction_1_1;
                         const a_58 = a_53;
-                        const b_44 = 1 / Math.sqrt((a_55 = a_53, (a_56 = a_55, (b_42 = a_55, ((a_56.vec[0] * b_42.vec[0]) + (a_56.vec[1] * b_42.vec[1])) + (a_56.vec[2] * b_42.vec[2])))));
-                        const x_41 = a_58.vec[0] * b_44;
-                        a_58.vec[0] = x_41;
-                        const y_39 = a_58.vec[1] * b_44;
-                        a_58.vec[1] = y_39;
-                        const z_38 = a_58.vec[2] * b_44;
-                        a_58.vec[2] = z_38;
+                        const b_44 = 1 / Math.sqrt((a_55 = a_53, (a_56 = a_55, (b_42 = a_55, ((a_56.X * b_42.X) + (a_56.Y * b_42.Y)) + (a_56.Z * b_42.Z)))));
+                        const x_41 = a_58.X * b_44;
+                        a_58.X = x_41;
+                        const y_39 = a_58.Y * b_44;
+                        a_58.Y = y_39;
+                        const z_38 = a_58.Z * b_44;
+                        a_58.Z = z_38;
                         const r_1_1 = new Ray(cam_1.origin, direction_1_1);
                         const a_59 = color;
                         const b_45 = fn(r_1_1);
-                        const x_42 = a_59.vec[0] + b_45.vec[0];
-                        a_59.vec[0] = x_42;
-                        const y_40 = a_59.vec[1] + b_45.vec[1];
-                        a_59.vec[1] = y_40;
-                        const z_39 = a_59.vec[2] + b_45.vec[2];
-                        a_59.vec[2] = z_39;
+                        const x_42 = a_59.X + b_45.X;
+                        a_59.X = x_42;
+                        const y_40 = a_59.Y + b_45.Y;
+                        a_59.Y = y_40;
+                        const z_39 = a_59.Z + b_45.Z;
+                        a_59.Z = z_39;
                     }
                 }
                 const a_61 = color;
                 const b_47 = 1 / cam_1.sampleCount;
-                const x_43 = a_61.vec[0] * b_47;
-                a_61.vec[0] = x_43;
-                const y_41 = a_61.vec[1] * b_47;
-                a_61.vec[1] = y_41;
-                const z_40 = a_61.vec[2] * b_47;
-                a_61.vec[2] = z_40;
+                const x_43 = a_61.X * b_47;
+                a_61.X = x_43;
+                const y_41 = a_61.Y * b_47;
+                a_61.Y = y_41;
+                const z_40 = a_61.Z * b_47;
+                a_61.Z = z_40;
                 const self_1 = color;
-                patternInput = [self_1.vec[0], self_1.vec[1], self_1.vec[2], 1];
+                patternInput = [self_1.X, self_1.Y, self_1.Z, 1];
                 buf[i] = patternInput[0];
                 buf[i + 1] = patternInput[1];
                 buf[i + 2] = patternInput[2];

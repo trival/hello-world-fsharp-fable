@@ -2,21 +2,23 @@ module Vectors.Vec3F64
 
 open Utils
 
-type Vec3(x: float, y: float, z: float) =
+type Vec3(_x: float, _y: float, _z: float) =
 
-  let vec = [| x; y; z |]
+  let mutable X = _x
+  let mutable Y = _y
+  let mutable Z = _z
 
   member inline _.x
-    with get () = vec[0]
-    and set x = vec[0] <- x
+    with get () = X
+    and set x = X <- x
 
   member inline _.y
-    with get () = vec[1]
-    and set y = vec[1] <- y
+    with get () = Y
+    and set y = Y <- y
 
   member inline _.z
-    with get () = vec[2]
-    and set z = vec[2] <- z
+    with get () = Z
+    and set z = Z <- z
 
   static member inline (+)(a: Vec3, b: Vec3) =
     let x = a.x + b.x

@@ -21,8 +21,8 @@ export function Ray__at_5E38073B(r, t) {
     let b_2;
     const a_1 = r.direction;
     const b_1 = t;
-    b_2 = Vec3_$ctor_Z7AD9E565(a_1.vec[0] * b_1, a_1.vec[1] * b_1, a_1.vec[2] * b_1);
-    return Vec3_$ctor_Z7AD9E565(a_2.vec[0] + b_2.vec[0], a_2.vec[1] + b_2.vec[1], a_2.vec[2] + b_2.vec[2]);
+    b_2 = Vec3_$ctor_Z7AD9E565(a_1.X * b_1, a_1.Y * b_1, a_1.Z * b_1);
+    return Vec3_$ctor_Z7AD9E565(a_2.X + b_2.X, a_2.Y + b_2.Y, a_2.Z + b_2.Z);
 }
 
 export class Hit extends Record {
@@ -51,12 +51,12 @@ export class Sphere extends Record {
         let oc;
         const a = ray.origin;
         const b = s.center;
-        oc = Vec3_$ctor_Z7AD9E565(a.vec[0] - b.vec[0], a.vec[1] - b.vec[1], a.vec[2] - b.vec[2]);
+        oc = Vec3_$ctor_Z7AD9E565(a.X - b.X, a.Y - b.Y, a.Z - b.Z);
         let halfB;
         const a_1 = oc;
         const b_1 = ray.direction;
-        halfB = (((a_1.vec[0] * b_1.vec[0]) + (a_1.vec[1] * b_1.vec[1])) + (a_1.vec[2] * b_1.vec[2]));
-        const discriminant = (halfB * halfB) - (((a_2 = oc, (a_3 = a_2, (b_2 = a_2, ((a_3.vec[0] * b_2.vec[0]) + (a_3.vec[1] * b_2.vec[1])) + (a_3.vec[2] * b_2.vec[2]))))) - (s.radius * s.radius));
+        halfB = (((a_1.X * b_1.X) + (a_1.Y * b_1.Y)) + (a_1.Z * b_1.Z));
+        const discriminant = (halfB * halfB) - (((a_2 = oc, (a_3 = a_2, (b_2 = a_2, ((a_3.X * b_2.X) + (a_3.Y * b_2.Y)) + (a_3.Z * b_2.Z))))) - (s.radius * s.radius));
         if (discriminant < 0) {
             return void 0;
         }
@@ -74,7 +74,7 @@ export class Sphere extends Record {
             }
             else {
                 const p = Ray__at_5E38073B(ray, t);
-                return (t_1 = t, (p_1 = p, (normal = ((a_6 = ((a_4 = p, (b_3 = s.center, Vec3_$ctor_Z7AD9E565(a_4.vec[0] - b_3.vec[0], a_4.vec[1] - b_3.vec[1], a_4.vec[2] - b_3.vec[2])))), (b_5 = (1 / s.radius), Vec3_$ctor_Z7AD9E565(a_6.vec[0] * b_5, a_6.vec[1] * b_5, a_6.vec[2] * b_5)))), (frontFace = (((a_7 = normal, (b_6 = p_1, ((a_7.vec[0] * b_6.vec[0]) + (a_7.vec[1] * b_6.vec[1])) + (a_7.vec[2] * b_6.vec[2])))) < 0), new Hit(t_1, p_1, frontFace ? normal : ((a_8 = normal, Vec3_$ctor_Z7AD9E565(a_8.vec[0] * -1, a_8.vec[1] * -1, a_8.vec[2] * -1))), frontFace)))));
+                return (t_1 = t, (p_1 = p, (normal = ((a_6 = ((a_4 = p, (b_3 = s.center, Vec3_$ctor_Z7AD9E565(a_4.X - b_3.X, a_4.Y - b_3.Y, a_4.Z - b_3.Z)))), (b_5 = (1 / s.radius), Vec3_$ctor_Z7AD9E565(a_6.X * b_5, a_6.Y * b_5, a_6.Z * b_5)))), (frontFace = (((a_7 = normal, (b_6 = p_1, ((a_7.X * b_6.X) + (a_7.Y * b_6.Y)) + (a_7.Z * b_6.Z)))) < 0), new Hit(t_1, p_1, frontFace ? normal : ((a_8 = normal, Vec3_$ctor_Z7AD9E565(a_8.X * -1, a_8.Y * -1, a_8.Z * -1))), frontFace)))));
             }
         }
     }
