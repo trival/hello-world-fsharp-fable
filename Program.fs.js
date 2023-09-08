@@ -33,7 +33,7 @@ export function start() {
     const newData = new ImageData(width, height);
     newData.data.set(buf);
     ctx.putImageData(newData, 0, 0);
-    div.innerHTML = (("done! (took " + (timeAfter - timeBefore).toString()) + "ms)");
+    div.innerHTML = (("done! render time: " + (timeAfter - timeBefore).toString()) + "ms");
 }
 
 window.setTimeout(() => {

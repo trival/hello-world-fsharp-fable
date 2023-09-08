@@ -7,14 +7,16 @@ open Shapes
 let width = 400
 let height = 300
 
-let samplesPerPixel = 20
-let maxRayBounces = 20
+let props =
+  { defaultRenderProps with
+      width = width
+      height = height
+
+      focalLength = 0.9
+      samplePerPixel = 100
+      maxRayBounces = 20 }
 
 let render () =
-  let cam =
-    { defaultCamera with
-        focalLength = 0.9
-        sampleCount = samplesPerPixel }
 
   let world =
     HittableList(
@@ -26,31 +28,6 @@ let render () =
         sphere (vec3 0 -100.5 -1) 100.0 ]
     )
 
-  let image =
-    renderRays width height cam (fun r ->
-
-      let rec getColor r depth =
-        match world.rayHit r 0.001 100000.0 with
-        | None ->
-          let t = 0.5 * (r.direction.y + 1.)
-          let col1 = vec3 1 1 1
-          let col2 = vec3 0.5 0.7 1
-          col1.lerp col2 t
-
-        | Some hit ->
-          if depth > 0 then
-            let mutable direction = randomUnitVector ()
-            direction += hit.normal
-            direction.normalize ()
-
-            if direction.nearZero () then
-              direction <- hit.normal
-
-            let newRay = ray hit.p direction
-            0.5 * getColor newRay (depth - 1)
-          else
-            vec3 0 0 0
-
-      getColor r maxRayBounces)
+  let image = renderRays props world
 
   image |> Array.map (fun v -> v ** 0.7)

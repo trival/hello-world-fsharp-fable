@@ -33,6 +33,6 @@ let start () =
   emitJsStatement () "newData.data.set(buf)"
   ctx.putImageData (newData, 0.0, 0.0)
 
-  div.innerHTML <- "done! (took " + string (timeAfter - timeBefore) + "ms)"
+  div.innerHTML <- "done! render time: " + string (timeAfter - timeBefore) + "ms"
 
 window.setTimeout (start, 100) |> ignore

@@ -104,11 +104,9 @@ type Vec3(_x: float, _y: float, _z: float) =
 
   member inline a.length() = sqrt (a.lengthSquared ())
 
-  /// creates a normalized copy of this vector
-  member inline a.normalized() = a / a.length ()
-
-  /// normalizes this vector in place
-  member inline a.normalize() = a /= a.length ()
+  member inline a.normalize() =
+    a /= a.length ()
+    a
 
   member inline a.lerp (b: Vec3) (t: float) = a * (1.0 - t) + b * t
 
@@ -135,15 +133,12 @@ let inline randomRangeVec3 (min: Vec3) (max: Vec3) =
 
 let inline randomInUnitSphere () =
   let rec loop () =
-    let p = randomRangeVec3 (vec3_1 -1.0) (vec3_1 1.0)
+    let p = vec3 (randomRange -1.0 1.0) (randomRange -1.0 1.0) (randomRange -1.0 1.0)
     if p.lengthSquared () >= 1.0 then loop () else p
 
   loop ()
 
-let inline randomUnitVector () =
-  let n = randomInUnitSphere ()
-  n.normalize ()
-  n
+let inline randomUnitVector () = (randomInUnitSphere ()).normalize ()
 
 let inline randomInHemisphere (normal: Vec3) =
   let inUnitSphere = randomInUnitSphere ()
